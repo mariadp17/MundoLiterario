@@ -5,6 +5,8 @@
 
 html{
     height: 100vh;
+    color: aliceblue;
+    background-color: #2A567E;
 }
 
 body{
@@ -14,34 +16,30 @@ body{
 
 .menu{
     width: 100%;
-    height: 240px;
-    background-color: aqua;
-}
-
-.menu1{
-    width: 100%;
-    height: 30px;
-    background-color: aquamarine;
-    text-align: center;
+    height: 250px;
+    background-color: white;
 }
 
 .menu2{
     width: 100%;
-    height: 35px;
-    background-color: beige;
+    height: 50px;
+    background-color: #2A567E;
     display: flex;
+    position: fixed;
+    padding-top: 10px;
 }
 
 .logo{
     width: 100px;
     height: 100px;
     background-color: black;
-    margin-top: 50px;
+    margin-top: 90px;
     margin-left: 30px;
 }
 
 h1{
     margin-left: 110px;
+    color: #2A567E;
 }
 
 button{
@@ -57,17 +55,18 @@ button{
 .destaques{
     width: 230px;
     height: 35px;
-    background-color: aliceblue;
+    background-color: #2A567E;
     text-align: center;
     transition: 0.3 ease;
+    padding-top: 13px;
 }
 
 .destaques:hover{
-    background-color: blueviolet;
+    background-color: #6D7993;
 }
 
 #divBusca {
-    background-color: beige;
+    background-color: #2A567E;
     flex-grow: 1; /* Ocupa todo o espaço restante */
     display: flex;
     align-items: center; /* Centraliza os itens verticalmente */
@@ -89,6 +88,65 @@ button{
     height: 100vh;
     justify-content: center;
     margin: auto;
+    display: block;
+    background-color: #2A567E;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Cria quatro colunas com larguras iguais */
+    gap: 40px; /* Espaçamento entre as colunas */
+    padding: 20px;
+    padding-top: 40px;
+    width: 90%;
+    height: 450px;
+    max-width: 1300px;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+.grid-item {
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.slider{
+    overflow: hidden;
+    width: 90%;
+    height: 400px;
+    background-color: #3498db;
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+.slider > .slider-content{
     display: flex;
-    background-color: aqua;
+    flex-wrap: nowrap;
+    width: 100%;
+    transition: all 500ms ease;
+
+}
+
+.slider > .slider-content > .slider-item {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+.slider > input:nth-child(1):checked ~ .slider-content{
+    transform: translateX(0%);
+}
+
+.slider > input:nth-child(2):checked ~ .slider-content{
+    transform: translateX(-100%);
+}
+.slider > input:nth-child(3):checked ~ .slider-content{
+    transform: translateX(-200%);
+}
+
+.slider > input:nth-child(4):checked ~ .slider-content{
+    transform: translateX(-300%);
 }
