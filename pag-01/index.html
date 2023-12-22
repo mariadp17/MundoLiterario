@@ -9,40 +9,72 @@
 </head>
 <body>
     <div class="menu">
-        <div class="logo"><h1>MUNDO LITERARIO</h1></div>
-        <button>Carrinho</button><button>Inciar</button><button>Cadastre-se</button>
+        <div class="logo"><img class="img" src="imgs_carrosel/logomarca.svg"><h1>MUNDO LITERARIO</h1></div>
+        <div class="div">
+            <button class="botao">Carrinho</button><button class="botao">Inciar</button><button class="botao">Cadastre-se</button>
+        </div>
     </div>
     <div class="menu2">
         <div class="destaques">INICIO</div>
         <div class="destaques">DESTAQUES</div>
         <div class="destaques">PRODUTOS</div>
         <div class="destaques">CONTATOS</div>
-        <div id="divBusca">
-            <input type="text" id="txtBusca" placeholder="Buscar..."/>
-            <img src="lupa.svg" id="btnBusca" alt="Buscar"/>
-        </div>
+        <div class="destaques">TERMOS DE USO</div>
+        <form class="search-container">
+            <input type="text" id="search-bar" placeholder="Busca">
+            <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+            </form>
+          </body>
     </div>
+
     <div class="corpo">
         <section class="slider">
             <input name='slide' type="radio" >
             <input name='slide' type="radio" checked>
             <input name='slide' type="radio">
             <input name='slide' type="radio">
+            <input name='slide' type="radio">
         
             <div class="slider-content">
-                <div class="slider-item">1</div>
-                <div class="slider-item">2</div>
+                <div class="slider-item">
+                    <img src="imgs_carrosel/MUNDO LITERARIO (3).png">
+                </div>
+                <div class="slider-item">
+                    <img src="imgs_carrosel/MUNDO LITERARIO (4).png">
+                </div>
                 <div class="slider-item">3</div>
                 <div class="slider-item">4</div>
+                <div class="slider-item"></div>
             </div>
         </section>
-        
+
+        <div class="produt">
+            <h1 class="produtos">PRODUTOS EM DESTAQUE<div class="linha"></div></h1>
+        </div>
+
+
+        <div class="grid-container">
+            <div class="grid-item">
+                <div class="card">detalhes</div>
+                <div class="card">comprar</div>
+            </div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
         <div class="grid-container">
             <div class="grid-item">1</div>
             <div class="grid-item">2</div>
             <div class="grid-item">3</div>
             <div class="grid-item">4</div>
         </div>
+        <div class="grid-container">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
+        <button class="mais_produtos">VER MAIS PRODUTOS</button>
     </div>
 </body>
 </html>
