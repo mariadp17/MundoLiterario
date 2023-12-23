@@ -102,7 +102,7 @@ button{
 
 
 .destaques{
-    width: 230px;
+    width: 50%;
     height: 35px;
     background-color: #33618c;
     color: #f2a81d;
@@ -122,27 +122,30 @@ button{
 .corpo{
     width: 100%;
     height: 100vh;
-    justify-content: center;
-    margin: auto;
     display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
     flex-direction: column;
     background-color: white;
 }
 
 
-.produt{
-    display: block;
+.produtos_destaques{
+    display: flex;
+    margin-top: 60px;
+    color: #f2a81d;
 }
-
 
 .produtos{
-    margin-top: 50px;
+    margin-left: 45px;
 }
+
 .linha{
-    width: 80%;
+    width: 62%;
+    margin-top: 20px;
     height: 1px;
     background-color: #2A567E;
-    display: flex;
 }
 
 
@@ -152,8 +155,8 @@ button{
     gap: 40px; /* Espaçamento entre as colunas */
     padding: 20px;
     padding-top: 40px;
-    width: 80%;
-    height: 50%;
+    width: 100%;
+    height: 70%;
     max-width: 1300px;
     box-sizing: border-box;
     margin-top: 50px;
@@ -162,27 +165,46 @@ button{
 
 
 .grid-item {
-    background-color: #3498db;
+    display: flex;
+    flex-direction: row;
+    background-color: #2A567E;
     color: #fff;
     text-align: center;
     padding: 20px;
+    align-items: flex-end;
 }
 
 
 .card{
     width: 100%;
     height: 30px;
-    background-color: rgb(179, 79, 79);
+    background-color: #2A567E;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3;
+}
+
+.card:hover{
+    border: 1px solid #f2a81d ;
 }
 
 
 .mais_produtos{
-    width: 250px;
-    height: 70px;
+    width: 15%;
+    height: 10%;
     background-color: #2A567E;
     color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3;
+    margin-left: 42%;
 }
 
+.mais_produtos:hover{
+    background-color: #f2a81d;
+}
 
 .slider{
     overflow: hidden;
@@ -202,9 +224,13 @@ button{
     width: 100%;
     transition: all 500ms ease;
 
-
 }
 
+.slider-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .slider > .slider-content > .slider-item {
     flex: 0 0 auto;
@@ -231,9 +257,10 @@ button{
 
 
 .search-container{
-    width: 490px;
+    width: 80%;
     display: block;
     margin: 0 auto;
+    margin-right: 50px;
   }
  
   input#search-bar{
@@ -274,8 +301,29 @@ button{
  
 
 
-  @media  screen and(max-width:768px) {
-   
+  @media  screen and (max-width: 768px) {
+    .grid-container{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+   }
+
+   .grid-item{
+    height: 150px;
+   }
+
+   .slider{
+    width: 100%;
+    height: 250px;
+   }
+
+   .mais_produtos{
+    margin-left: 0;
+   }
+
+   .logo{
+    float: left;
+    margin-left: 0;
+   }
    
   }
  
