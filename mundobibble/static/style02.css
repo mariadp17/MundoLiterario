@@ -21,18 +21,18 @@ body{
     background-color: #2A567E;
 }
 
-.cadastro{
+.login{
     display: flex;
     margin-top: 60px;
     color: #f2a81d;
 }
 
-.cadastre_se{
+.iniciar{
     margin-left: 45px;
 }
 
 .linha{
-    width: 75%;
+    width: 80%;
     margin-top: 20px;
     height: 1px;
     background-color: #2A567E;
@@ -96,8 +96,8 @@ body{
     background-color: #2A567E;
     width: 40%;
     height: 70px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     padding: 0.5em 1.3em;
     color: #f2a81d;
     font-size: 1.2em;
