@@ -161,11 +161,11 @@ button{
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Cria quatro colunas com larguras iguais */
-    gap: 40px; /* Espaçamento entre as colunas */
+    gap: 30px; /* Espaçamento entre as colunas */
     padding: 20px;
     padding-top: 40px;
-    width: 100%;
-    height: 70%;
+    width: 90%;
+    height: 80%;
     max-width: 1300px;
     box-sizing: border-box;
     margin-top: 50px;
@@ -175,21 +175,44 @@ button{
 
 .grid-item {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #2A567E;
     color: #fff;
     text-align: center;
-    padding: 20px;
     align-items: flex-end;
+    padding: 20px;
 }
 
+.grid-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid-item p{
+    width: 100%;
+    height: 100px;
+    background-color: #2A567E;
+    color: #f2a81d;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.card-container{
+    display: flex;
+    margin:auto;
+    gap: 20px;
+}
 
 .card{
     width: 100%;
     height: 30px;
     background-color: #2A567E;
+    color: #f2a81d;
     margin-top: 10px;
-    justify-content: center;
+    padding: 8px;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
     cursor: pointer;
     transition: 0.3;
