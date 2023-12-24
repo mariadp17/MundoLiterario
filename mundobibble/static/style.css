@@ -3,6 +3,9 @@
     padding: 0;
 }
 
+i{
+    background-color: #000000;
+}
 
 html{
     height: 100vh;
@@ -219,7 +222,7 @@ button{
 }
 
 .card:hover{
-    border: 1px solid #f2a81d ;
+    border: 1px solid #f2a81d;
 }
 
 
@@ -232,10 +235,18 @@ button{
     cursor: pointer;
     transition: 0.3;
     margin-left: 42%;
+    text-decoration: none;
 }
 
 .mais_produtos:hover{
     background-color: #f2a81d;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .slider{
