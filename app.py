@@ -10,17 +10,20 @@ def home():
 
 @app.route('/cadastro', methods = ['GET','POST'])
 def cadastro():
-    if Form.validate_on_submit:
-        nome = request.form.get('nome') 
-        cpf = request.form.get('cpf') 
-        email = request.form.get('mail') 
-        endereco = request.form.get('ender')
-        
-        return render_template('index-cadastro.html')
+    nome = request.form.get('nome') 
+    cpf = request.form.get('cpf') 
+    mail = request.form.get('mail') 
+    ender = request.form.get('ender')
+    
+    return render_template('index-cadastro.html', nome = nome, cpf = cpf, mail = mail, ender = ender)
 
 @app.route('/iniciar', methods = ['GET', 'POST'])
 def iniciar():
     return render_template('index-iniciar.html')
+
+@app.route('/carrinho', methods = ['GET', 'POST'])
+def carrinho():
+    return render_template('index-carrinho.html')
 
 if __name__ == "__main__":
     app.run(debug = True)
