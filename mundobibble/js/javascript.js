@@ -9,3 +9,4 @@ function menuShow(){
        iconImg.src = '../static/imgs/close_white_36dp.svg';
     }
 }
+
