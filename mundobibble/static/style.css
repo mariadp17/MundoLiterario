@@ -12,8 +12,8 @@ html{
 
 body{
     display: flex;
-    border: 1px solid red;
     flex-direction: column;
+    min-height: 1500px;
 }
 
 
@@ -188,10 +188,10 @@ button{
     grid-template-rows: auto;
     gap: 30px; /* Espaçamento entre as colunas */
     width: 100%;
-    height: 50%;
+    height: 30%;
     max-width: 1300px;
     box-sizing: border-box;
-    margin: auto;
+    margin: 50px auto;
 }
 
 
@@ -368,7 +368,7 @@ a{
 
 .card{
     width: 100%;
-    height: 20VH;
+    height: 30px;
     background-color: #2A567E;
     color: #f2a81d;
     margin-top: 10px;
@@ -386,14 +386,15 @@ a{
 
 
 .mais_produtos{
-    width: 15%;
-    height: 10%;
+    width: 20%;
+    height: 70px;
     background-color: #2A567E;
     color: #fff;
     text-align: center;
     cursor: pointer;
     transition: 0.3;
     margin-left: 42%;
+    margin-top: 30px;
     text-decoration: none;
 }
 
@@ -462,7 +463,7 @@ footer{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 600px;
+    height: 100vh;
     background-color: #33618c;
 }
 
@@ -581,18 +582,10 @@ footer{
     height: auto;
    }
 
-   .grid-container2{
-    grid-template-columns: repeat(3, 1fr);
-    font-size: 10px;
+   .card{
+    height: 20px;
    }
 
-   .grid-item2{
-    height: auto;
-   }
-
-   .grid-item2 img{
-    object-fit: cover;
-   }
    .slider{
     width: 100%;
     height: 250px;
