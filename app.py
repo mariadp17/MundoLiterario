@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from mundobibble import create_app
 from flask_mysqldb import MySQL
+
 from flask_login import login_user
 
 app = create_app()
