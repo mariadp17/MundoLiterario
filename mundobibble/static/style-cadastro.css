@@ -20,6 +20,10 @@ body{
   background-color: #2A567E;
 }
 
+form{
+  border: none;
+  background-color: #2A567E;
+}
 
 .menu2{
   width: 100%;
@@ -217,7 +221,6 @@ input#search-bar{
     width: 100%; 
     box-sizing: border-box; 
     letter-spacing: 1px;
-    border: 1px solid #2A567E; 
     padding: 7px 14px 9px; 
     transition: 0.4s;
   

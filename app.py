@@ -71,23 +71,23 @@ def cadastro():
             cursor = db.cursor(dictionary=True)
             selectUserID = (f"SELECT UsuarioID FROM Usuario WHERE email='{email}'")
             cursor.execute(selectUserID)
-            fetch_cpf = cursor.fetchall()
-            fetch_cpf[0]['UsuarioID']
+            fetch_IDuser = cursor.fetchall()
+            fetch_IDuser[0]['UsuarioID']
             
             telefoneBD = "INSERT INTO Telefone (Telefone1, CodUsuario) VALUES (%s, %s)"
             
-            tupla_telefoneBD = (fetch_cpf[0]['UsuarioID'], telefone)
+            tupla_telefoneBD = (telefone, fetch_IDuser[0]['UsuarioID'])
             cursor.execute(telefoneBD, tupla_telefoneBD)
             cursor.close()
             db.commit()
-            return redirect('/')
+            return render_template('index.html')
     else:
         return render_template('index-cadastro.html')
 
 
 @app.route('/iniciar', methods = ['GET', 'POST'])
 def iniciar(): 
-    if request.methods == ['POST']:
+    if request.method == ['POST']:
         user = request.form['nome']
         senha = request.form['senha']
     
@@ -99,10 +99,10 @@ def iniciar():
         if pessoaExiste:
             login_user(user)
             flash('Login bem-sucedido!')
-            return redirect(url_for('/'))
+            return render_template('index.html')
         else:
             flash('Usuário ou senha incorretos.')
-
+        
     return render_template('index-iniciar.html')
 
 @app.route('/carrinho', methods = ['GET', 'POST'])

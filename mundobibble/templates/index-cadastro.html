@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="menu">
-        <div class="logo"><img class="img" src="logomarca.svg"><h1>MUNDO LITERARIO</h1></div>
+        <div class="logo"><img class="img" src="../static/imgs/logomarca.svg"><h1>MUNDO LITERARIO</h1></div>
         <div class="div">
             <a class="botao" href="/carrinho">Carrinho</a>
             <a class="botao" href="/iniciar">Iniciar</a>
@@ -32,30 +32,34 @@
         <div class="linha"></div>
     </div>
 
-    <div class="formulario">
-        <form id="borda-inversa" action="/cadastro" method="post" enctype="multipart/form-data">
+        <form class="formulario" action="/cadastro" method="post" enctype="multipart/form-data">
             <div class="input-bordas">
-                <div>
-                    <p>Nome</p>
-                    <input type="text" name="name" required>
-                </div>
-                <div>
-                    <p>Email</p>
-                    <input type="email" name="email" required>
-                </div>
-                <div>
-                    <p>Telefone</p>
-                    <input type="text" name="telephone" required>
-                </div>
-                <div>
-                    <p>Senha</p>
-                    <input class="password" maxlength="16" class="password" maxlength="16" type="password" name="password" required>
+
+                <label class="label">
+                    <input type="text" name="name" class="input-bordas" placeholder="Nome" required>
+                    <span class="focus-border"><i></i></span>
+                </label>
+
+                <label class="label">
+                    <input type="email" name="email" class="input-bordas" placeholder="Email" required>
+                    <span class="focus-border"><i></i></span>
+                </label>
+
+                <label class="label">
+                    <input type="text" name="telephone" class="input-bordas" placeholder="Telefone" required>
+                    <span class="focus-border"><i></i></span>
+                </label>
+
+
+                <label class="label">
+                    <input class="input-bordas" maxlength="16" class="password" maxlength="16" type="password" name="password" placeholder="Senha" autocomplete="off" required>
+                    <span class="focus-border"><i></i></span>
                 </div>
                 <button id="haveAccount" onclick="iniciar()">Já tem uma conta?</button>
                 <button type="submit" id="btn-registrar" value="registrar">Cadastrar</button>
             </div>
         </form>
-    </div>
+
     
     <footer>
         <div class="footer">
@@ -69,7 +73,7 @@
                 </p>
         </div>
             <div><h2>Formas de pagamento</h2>
-                <img src="icons8-foto.svg">
+                <img src="../static/imgs/icons8-foto.svg">
             </div>
 
             <div>
@@ -77,7 +81,7 @@
                 <p>mundoliterario@gmail.com</p>
             </div>
         </div>
-        <img class="img-logo" src="logomarca.svg">
+        <img class="img-logo" src="../static/imgs/logomarca.svg">
     </footer>
 
 
