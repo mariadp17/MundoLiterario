@@ -1,16 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from mundobibble import create_app
 from flask_mysqldb import MySQL
-
+import mysql.connector
 from flask_login import login_user
+from flask_hashing import Hashing
 
 app = create_app()
 
 # Configurações do banco de dados
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'labinfo'
-app.config['MYSQL_DB'] = 'MundoLiterario'
+db = mysql.connector.connect(host = 'localhost', user = 'root', password = 'labinfo', database = 'MundoLiterario')
+
+hashing = Hashing(app)
 
 # Inicialização do MySQL
 mysql = MySQL()
@@ -36,44 +36,74 @@ def autor(name):
     cursor.close()
     return str(data)
 
-def formulario():
-    return render_template('index-cadastro.html')
-
 
 @app.route('/cadastro', methods = ['GET','POST'])
 def cadastro():
-    nome = request.form['nome'] 
-    cpf = request.form['cpf'] 
-    mail = request.form['mail'] 
-    ender = request.form['ender']
+    if request.method == 'POST':
 
-    cur = mysql.connection.cursor()
+        nome = request.form['name']
+        email = request.form['email']
+        telefone = request.form['telephone']
+        senha = request.form['password']
 
-    # Executar o comando SQL para inserir os dados na tabela usuário
-    cur.execute("INSERT INTO Usuario (nome, email, senha) VALUES (%s, %s, %s)", (nome, mail, ender))
-
-    # Commit para salvar as mudanças no banco de dados
-    mysql.connection.commit()
-
-    # Fechar o cursor
-    cur.close()
-
-
-    return render_template("index-cadastro.html", nome = nome, cpf = cpf, mail = mail, ender = ender, form = form)
+        #dando hashing na senha, hashing de 16 caracteres
+        hashed_password = hashing.hash_value(senha)
+        hashed_password = hashed_password[:16]
+        
+        #checando se o email já está cadastrado
+        cursor = db.cursor(dictionary=True)
+        cursor.execute(f"SELECT * FROM Usuario WHERE email='{email}'")
+        check_pessoa_existe = cursor.fetchall()
+        
+        if check_pessoa_existe:
+            return ("Este email já foi cadastrado!")
+        else:
+            # dando post no banco com as informações do cliente
+            userBD = "INSERT INTO Usuario (nome, senha, email) VALUES (%s, %s, %s)"
+            
+            tupla_user= (nome, senha, email)
+            
+            cursor.execute(userBD, tupla_user)
+            cursor.close()
+            db.commit()
+            
+            # criando outro cursor para pegar o id_cliente que acabou de ser adicionado para adicionar o telefone do mesmo
+            cursor = db.cursor(dictionary=True)
+            selectUserID = (f"SELECT UsuarioID FROM Usuario WHERE email='{email}'")
+            cursor.execute(selectUserID)
+            fetch_cpf = cursor.fetchall()
+            fetch_cpf[0]['UsuarioID']
+            
+            telefoneBD = "INSERT INTO Telefone (Telefone1, CodUsuario) VALUES (%s, %s)"
+            
+            tupla_telefoneBD = (fetch_cpf[0]['UsuarioID'], telefone)
+            cursor.execute(telefoneBD, tupla_telefoneBD)
+            cursor.close()
+            db.commit()
+            return redirect('/')
+    else:
+        return render_template('index-cadastro.html')
 
 
 @app.route('/iniciar', methods = ['GET', 'POST'])
-def iniciar():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = user.query.filter_by(username = form.user.name.data).first()
-        if user and user.check_password(form.password.data):
+def iniciar(): 
+    if request.methods == ['POST']:
+        user = request.form['nome']
+        senha = request.form['senha']
+    
+        cursor = mysql.cursor(dictionary=True)
+        cursor.execute(f"SELECT * FROM Usuario WHERE nome ='{user}'")
+        cursor.execute(f"SELECT * FROM Usuario WHERE senha ='{senha}'")
+        pessoaExiste = cursor.fetchall()
+
+        if pessoaExiste:
             login_user(user)
-            flash('Seja bem-vindo!')
+            flash('Login bem-sucedido!')
             return redirect(url_for('/'))
         else:
-            flash('Usuario ou senha invalidos.')
-    return render_template('index-iniciar.html', form = form)
+            flash('Usuário ou senha incorretos.')
+
+    return render_template('index-iniciar.html')
 
 @app.route('/carrinho', methods = ['GET', 'POST'])
 def carrinho():

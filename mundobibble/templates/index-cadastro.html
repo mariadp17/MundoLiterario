@@ -23,53 +23,39 @@
         <form class="search-container">
             <input type="text" id="search-bar" placeholder="Busca">
             <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
-            </form>
-          </body>
+        </form>
     </div>
+
 
     <div class="cadastro">
         <div class="cadastre_se"><h1>CADASTRE-SE</h1></div>
         <div class="linha"></div>
     </div>
 
-    <form class="formulario" method="post" action="{{ url_for('index-cadastro.html') }}" action="enviaDados.php" autocomplete="off">
-        
-        <label class="label" for="name">
-            
-            <input type="text" class="input-bordas" placeholder="Nome" required="" name="nome" value="cadastro">
-            <span class="focus-border"> <i></i> </span>
-        
-        </label>
-
-        <label class="label" for="name">
-            
-            <input type="text" class="input-bordas" placeholder="CPF" required="" name="cpf" value="cadastro">
-            <span class="focus-border"> <i></i> </span>
-        
-        </label>
-
-        <label class="label" for="name">
-            
-            <input type="text" class="input-bordas" placeholder="E-mail" required="" name="mail" value="cadastro">
-            <span class="focus-border"> <i></i> </span>
-        
-        </label>
-
-        <label class="label" for="name">
-            
-            <input type="text" class="input-bordas" placeholder="Endereço" required="" name="ender" value="cadastro">
-            <span class="focus-border"> <i></i> </span>
-        
-        </label>
-
-        <label class="naoexibir">
-            <span>Não preencher:</span><br>
-            <input type="text" name="url" value=""></p>
-        </label> 
-
-        <a class="button-form borda-inversa" type="submit" class="btn btn-default">CADASTRE-SE</a>
-        <p>Já possui uma conta?<a href="/iniciar"> Iniciar</a></p>
-    </form>  
+    <div class="formulario">
+        <form id="borda-inversa" action="/cadastro" method="post" enctype="multipart/form-data">
+            <div class="input-bordas">
+                <div>
+                    <p>Nome</p>
+                    <input type="text" name="name" required>
+                </div>
+                <div>
+                    <p>Email</p>
+                    <input type="email" name="email" required>
+                </div>
+                <div>
+                    <p>Telefone</p>
+                    <input type="text" name="telephone" required>
+                </div>
+                <div>
+                    <p>Senha</p>
+                    <input class="password" maxlength="16" class="password" maxlength="16" type="password" name="password" required>
+                </div>
+                <button id="haveAccount" onclick="iniciar()">Já tem uma conta?</button>
+                <button type="submit" id="btn-registrar" value="registrar">Cadastrar</button>
+            </div>
+        </form>
+    </div>
     
     <footer>
         <div class="footer">

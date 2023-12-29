@@ -31,18 +31,18 @@
         <div class="linha"></div>
     </div>
 
-    <form class="formulario" method="post" action="enviaDados.php">
+    <form class="formulario" method="post" action="/iniciar">
         
         <label class="label">
             
-            <input type="text" class="input-bordas" placeholder="Nome" required="">
+            <input type="text" class="input-bordas" placeholder="Nome" name="nome" required>
             <span class="focus-border"> <i></i> </span>
         
         </label>
 
         <label class="label">
             
-            <input type="text" class="input-bordas" placeholder="Senha" required="">
+            <input type="text" class="input-bordas" placeholder="Senha" name="senha" required>
             <span class="focus-border"> <i></i> </span>
         
         </label>
@@ -53,7 +53,7 @@
         </label> 
 
         <button class="button-form borda-inversa">INICIAR SESSÃO</button>
-        <p>Não possui uma conta?<a href="index-cadastro.html">Cadastre-se</a></p>
+        <p>Não possui uma conta?<a href="/cadastro">Cadastre-se</a></p>
     </form>  
     
     <footer>
