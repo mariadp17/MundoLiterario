@@ -10,9 +10,9 @@
     <div class="menu">
         <div class="logo"><img class="img" src="logomarca.svg"><h1>MUNDO LITERARIO</h1></div>
         <div class="div">
-            <button class="botao"><a href="index-carrinho.html">Carrinho</a></button>
-            <button class="botao"><a href="index-iniciar.html">Iniciar</a></button>
-            <button class="botao"><a href="index-cadastro.html">Cadastre-se</a></button>
+            <a class="botao" href="/carrinho">Carrinho</a>
+            <a class="botao" href="/iniciar">Iniciar</a>
+            <a class="botao" href="/cadastro">Cadastre-se</a>
         </div>
     </div>
     <div class="menu2">
@@ -32,32 +32,32 @@
         <div class="linha"></div>
     </div>
 
-    <form class="formulario" method="post" action="/cadastro" action="enviaDados.php" autocomplete="off">
+    <form class="formulario" method="post" action="{{ url_for('index-cadastro.html') }}" action="enviaDados.php" autocomplete="off">
         
         <label class="label" for="name">
             
-            <input type="text" class="input-bordas" placeholder="Nome" required="" name="nome">
+            <input type="text" class="input-bordas" placeholder="Nome" required="" name="nome" value="cadastro">
             <span class="focus-border"> <i></i> </span>
         
         </label>
 
         <label class="label" for="name">
             
-            <input type="text" class="input-bordas" placeholder="CPF" required="" name="cpf">
+            <input type="submit" class="input-bordas" placeholder="CPF" required="" name="cpf" value="cadastro">
             <span class="focus-border"> <i></i> </span>
         
         </label>
 
         <label class="label" for="name">
             
-            <input type="text" class="input-bordas" placeholder="E-mail" required="" name="mail">
+            <input type="submit" class="input-bordas" placeholder="E-mail" required="" name="mail" value="cadastro">
             <span class="focus-border"> <i></i> </span>
         
         </label>
 
         <label class="label" for="name">
             
-            <input type="text" class="input-bordas" placeholder="Endereço" required="" name="ender">
+            <input type="submit" class="input-bordas" placeholder="Endereço" required="" name="ender" value="cadastro">
             <span class="focus-border"> <i></i> </span>
         
         </label>
@@ -67,8 +67,8 @@
             <input type="text" name="url" value=""></p>
         </label> 
 
-        <button class="button-form borda-inversa" type="submit" class="btn btn-default">CADASTRE-SE</button>
-        <p>Já possui uma conta?<a href="index-iniciar.html">Iniciar</a></p>
+        <a class="button-form borda-inversa" type="submit" class="btn btn-default">CADASTRE-SE</a>
+        <p>Já possui uma conta?<a href="/iniciar"> Iniciar</a></p>
     </form>  
     
     <footer>
