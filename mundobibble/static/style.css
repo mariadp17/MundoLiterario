@@ -317,47 +317,47 @@ a{
 }
 
 
-.search-container{
-    width: 80%;
-    display: block;
-    margin: 0 auto;
-    margin-right: 50px;
-  }
- 
-  input#search-bar{
-    margin: 0 auto;
-    margin-bottom: 110px;
-    width: 80%;
-    height: 35px;
-    padding: 0 20px;
-    font-size: 1rem;
-    border: 1px solid #D0CFCE;
-    outline: none;
-    :focus{
-      border: 1px solid #000000;
-      transition: 0.35s ease;
-      color: #000000;
-      ::-webkit-input-placeholder{
-        transition: opacity 0.45s ease;
-          opacity: 0;
-       }
-      ::-moz-placeholder {
-        transition: opacity 0.45s ease;
-          opacity: 0;
-       }
-      :-ms-placeholder {
-       transition: opacity 0.45s ease;
-         opacity: 0;
-       }    
-     }
-   }
- 
-  .search-icon{
-    position: relative;
+.search {
+    width: 60%;
+    margin-top: 30px;
+    background-color: #9DBFAF;
     float: right;
-    width: 75px;
-    height: 75px;
-    margin-bottom: 80px;
+    display: flex;
+  }
+  
+  .searchTerm {
+    border-right: none;
+    border: 3px solid #f2a81d;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+    background-color: #fff;
+  }
+  
+  .searchTerm:focus{
+    color: #2A567E;
+  }
+  
+  .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #f2a81d;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  /*Resize the wrap to see the search bar change!*/
+  .wrap{
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #da971b;
   }
 
 .card-container{
