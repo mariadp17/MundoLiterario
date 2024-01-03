@@ -36,6 +36,37 @@ def autor(name):
     cursor.close()
     return str(data)
 
+@app.route('/cadastro-fornecedor', methods = ['GET', 'POST'])
+def cadastroFornecedor():
+    if request.method == 'POST':
+        nome = request.form['name']
+        cnpj = request.form['cnpj']
+        email = request.form['email']
+        senha = request.form['password']
+        
+        #dando hashing na senha, hashing de 16 caracteres
+        hashed_password = hashing.hash_value(senha)
+        hashed_password = hashed_password[:16]
+        
+        #checando se o cpf já está cadastrado
+        cursor = db.cursor(dictionary=True)
+        cursor.execute(f"SELECT * FROM Fornecedor WHERE cnpj='{cnpj}'")
+        check_fornecedorExiste = cursor.fetchall()
+        
+        if check_fornecedorExiste:
+            raise Exception("Esse cnpj já está cadastrado!")
+        else:
+            # dando post no banco com as informações do fornecedor
+            post_fornecedor = "INSERT INTO Fornecedor (cnpj, nome, senha, email) VALUES (%s, %s, %s, %s)"
+            
+            tupla_fornecedorInfo = (cnpj, nome, hashed_password, email)
+            
+            cursor.execute(post_fornecedor, tupla_fornecedorInfo)
+            cursor.close()
+            db.commit()
+            return render_template("/abafornecedor.html")
+    else:
+        return render_template('fornecedor.html')
 
 @app.route('/cadastro', methods = ['GET','POST'])
 def cadastro():
@@ -108,6 +139,57 @@ def iniciar():
 @app.route('/carrinho', methods = ['GET', 'POST'])
 def carrinho():
     return render_template('index-carrinho.html')
+
+@app.route('/cadastrarProduto', methods=['POST'])
+def enviar():
+    nomeProduto = request.form['nome-produto']
+    preco = request.form['preco']
+    quant = request.form['quantidade']
+    a = request.files['arq']
+    
+    ### Descobrir a extensao ###
+    extensao = a.filename.rsplit('.',1)[1]
+    '''
+    foto.png.jpg > "foto.png.jpg".rsplit('.',1) > ['foto.png', 'jpg'][1] > jpg
+    '''
+
+    caminho = f'PyTech/static/img/produtos/{nomeProduto}.{extensao}'
+    a.save(caminho)
+    
+    caminhoBD = f'../static/img/produtos/{nomeProduto}.{extensao}'
+    
+    cursor = db.cursor(dictionary=True)
+
+    sql = ("INSERT INTO Produto "
+           "(nome_produto, preco) "
+           "VALUES (%s, %s)")
+
+    tupla = (nomeProduto, preco)
+    cursor.execute(sql, tupla)
+    cursor.close()
+    db.commit()
+
+    cursor = db.cursor(dictionary=True)
+    select = (f"SELECT id_produto FROM Produto WHERE nome_produto='{nomeProduto}'")
+    cursor.execute(select)
+    fetchdata = cursor.fetchall()
+    
+    sql = ("INSERT INTO estoque (quantidade, id_fornecedor, id_produto) VALUES (%s, %s, %s)")
+    
+    tupla = (int(quant), 1, fetchdata[0]['id_produto'])
+    cursor.execute(sql, tupla)
+    
+    sql2 = ("INSERT INTO imagem_produto "
+        "(caminho, id_produto) "
+        "VALUES (%s, %s)")
+
+    tupla2 = (caminhoBD, fetchdata[0]['id_produto'])
+    
+    cursor.execute(sql2, tupla2)
+    cursor.close()
+    db.commit()
+
+    return render_template('abafornecedor.html')
 
 if __name__ == "__main__":
     app.run(debug = True)
