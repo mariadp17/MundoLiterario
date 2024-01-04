@@ -344,6 +344,40 @@ input#search-bar{
     margin: auto;
 }
 
+.block{
+  display: block;
+  flex-direction: column;
+}
+
+#haveAccount{
+  width: 20%;
+  height: 30px;
+  background-color: #2A567E;
+  color: #f2a81d;
+  border: none;
+  transition: 0.3;
+}
+
+#haveAccount:hover{
+  border: 1px solid #2A567E;
+  background-color: transparent;
+}
+
+#btn-registrar{
+  width: 20%;
+  height: 30px;
+  background-color: #2A567E;
+  color: #f2a81d;
+  border: none;
+  transition: 0.3;
+}
+
+#btn-registrar:hover{
+  border: 1px solid #2A567E;
+  background-color: transparent;
+}
+
+
   @media screen and(max-width:768px){
   
   }
