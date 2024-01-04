@@ -36,7 +36,7 @@ def autor(name):
     cursor.close()
     return str(data)
 
-@app.route('/cadastro-fornecedor', methods = ['GET', 'POST'])
+@app.route('/cadastro-fornecedor', methods = ['GET','POST'])
 def cadastroFornecedor():
     if request.method == 'POST':
         nome = request.form['name']
@@ -64,9 +64,9 @@ def cadastroFornecedor():
             cursor.execute(post_fornecedor, tupla_fornecedorInfo)
             cursor.close()
             db.commit()
-            return render_template("/abafornecedor.html")
+            return render_template("abafornecedor.html")
     else:
-        return render_template('fornecedor.html')
+        return render_template("fornecedor.html")
 
 @app.route('/cadastro', methods = ['GET','POST'])
 def cadastro():
@@ -140,51 +140,47 @@ def iniciar():
 def carrinho():
     return render_template('index-carrinho.html')
 
-@app.route('/cadastrarProduto', methods=['POST'])
+@app.route('/cadastrarProduto', methods=['GET','POST'])
 def enviar():
-    nomeProduto = request.form['nome-produto']
+    nome = request.form['nomeLivro']
+    dataDPubli = request.form['data']
     preco = request.form['preco']
     quant = request.form['quantidade']
-    a = request.files['arq']
-    
-    ### Descobrir a extensao ###
+    a = request.files['imgs']
+
     extensao = a.filename.rsplit('.',1)[1]
     '''
     foto.png.jpg > "foto.png.jpg".rsplit('.',1) > ['foto.png', 'jpg'][1] > jpg
     '''
 
-    caminho = f'PyTech/static/img/produtos/{nomeProduto}.{extensao}'
+    caminho = f'../static/imgs/{nome}.{extensao}'
     a.save(caminho)
-    
-    caminhoBD = f'../static/img/produtos/{nomeProduto}.{extensao}'
-    
+        
+    caminhoBD = f'../static/imgs/{nome}.{extensao}'
+        
     cursor = db.cursor(dictionary=True)
 
-    sql = ("INSERT INTO Produto "
-           "(nome_produto, preco) "
-           "VALUES (%s, %s)")
+    sql = ("INSERT INTO Livro (nome, dataDPubli, preco, CodAutor, CodEditora, CodCategoria, quantidade) VALUES (%s, %s, %s, %s, %s, %s)")
 
-    tupla = (nomeProduto, preco)
+    tupla = (nome, dataDPubli, preco, quant)
     cursor.execute(sql, tupla)
     cursor.close()
     db.commit()
 
     cursor = db.cursor(dictionary=True)
-    select = (f"SELECT id_produto FROM Produto WHERE nome_produto='{nomeProduto}'")
+    select = (f"SELECT LivroID FROM Livro WHERE nome='{nome}'")
     cursor.execute(select)
     fetchdata = cursor.fetchall()
-    
-    sql = ("INSERT INTO estoque (quantidade, id_fornecedor, id_produto) VALUES (%s, %s, %s)")
-    
-    tupla = (int(quant), 1, fetchdata[0]['id_produto'])
+        
+    sql = ("INSERT INTO Estoque (quantidade, FornecedorID, LivroID) VALUES (%s, %s, %s)")
+        
+    tupla = (int(quant), 1, fetchdata[0]['LivroID'])
     cursor.execute(sql, tupla)
-    
-    sql2 = ("INSERT INTO imagem_produto "
-        "(caminho, id_produto) "
-        "VALUES (%s, %s)")
+        
+    sql2 = ("INSERT INTO IMG (caminho, CodLivro, CodImg) VALUES (%s, %s)")
 
-    tupla2 = (caminhoBD, fetchdata[0]['id_produto'])
-    
+    tupla2 = (caminhoBD, fetchdata[0]['LivroID'])
+        
     cursor.execute(sql2, tupla2)
     cursor.close()
     db.commit()
