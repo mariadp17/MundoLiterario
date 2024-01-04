@@ -1,3 +1,3 @@
 use MundoLiterario;
 
-select * from Usuario
+select * from Fornecedor
