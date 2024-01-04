@@ -42,28 +42,6 @@ body{
     display: none;
 }
 
-.menu-mobile{
-    display: none;
-    justify-content: space-around;
-}
-
-.mobile{
-    display: flex;
-    align-items: center;
-}
-
-.mobile .icon{
-    display: none;
-}
-
-.mobile-menu{
-    display: none;
-}
-
-.mobile-menu .open{
-    display: block;
-}
-
 .logo{
     display: flex;
     align-items: center;
@@ -137,7 +115,7 @@ a{
 
 
 .destaques{
-    width: 100%;
+    width: 50%;
     height: 35px;
     background-color: #33618c;
     color: #f2a81d;
@@ -526,29 +504,6 @@ footer{
     .menu2{
         flex-direction: column;
         height: 10vh;
-    }
-
-    .botao{
-        display: none;
-    }
-
-    .mobile .icon{
-        display: block;
-    }
-
-    .mobile .search-icon{
-        top: 0;
-        right: 80%;
-    }
-
-    .mobile-menu div{
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .open{
-        display: block;
     }
 
     .produtos_destaques{
