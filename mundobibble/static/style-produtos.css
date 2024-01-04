@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'minhafonte';
+    src: url(../static/quartzo-font/QuartzoBold-W9lv.ttf) format('tff');
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -79,6 +84,8 @@ body{
 a{
     width: 130px;
     height: 30px;
+    text-decoration: none;
+    color: #f2a81d;
 }
 
 
@@ -294,6 +301,11 @@ select {
 
 .card:hover{
     border: 1px solid #f2a81d;
+}
+
+.grid-item img{
+    object-fit: cover;
+    width: 100%;
 }
 
 .produtinhos{
