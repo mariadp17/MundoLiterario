@@ -138,6 +138,7 @@ def iniciar():
         cursor.execute(f"SELECT * FROM Usuario WHERE nome ='{user}'")
         cursor.execute(f"SELECT * FROM Usuario WHERE senha ='{senha}'")
         pessoaExiste = cursor.fetchall()
+        print(pessoaExiste)
 
         if pessoaExiste:
             return render_template('index.html')

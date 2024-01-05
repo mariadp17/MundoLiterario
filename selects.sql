@@ -1,8 +1,8 @@
 use MundoLiterario;
 
-#select * from IMG
+/*select * from IMG
 SELECT caminho 
 FROM IMG
-INNER JOIN Livro ON CodLivro = LivroID
+INNER JOIN Livro ON CodLivro = LivroID*/
 
-#select * from IMG
+select * from estoque
