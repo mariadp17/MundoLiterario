@@ -143,7 +143,7 @@ def iniciar():
             return render_template('index.html')
         else:
             flash('Usuário ou senha incorretos.')
-    return render_template('index.html')
+    return render_template('index-iniciar.html')
 
 @app.route('/carrinho', methods = ['GET', 'POST'])
 def carrinho():
