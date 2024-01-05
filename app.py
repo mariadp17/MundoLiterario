@@ -28,9 +28,9 @@ def home():
     select = "SELECT * FROM Livro"
     cursor.execute(select)
     livros = cursor.fetchall()
-
-    select = "SELECT * FROM IMG"
+    print(livros)
     
+    select = "SELECT * FROM IMG"
     cursor.execute(select)
     imgs = cursor.fetchall()
     print(livros)
@@ -63,11 +63,9 @@ def cadastroFornecedor():
         email = request.form['email']
         senha = request.form['password']
         
-        #dando hashing na senha, hashing de 16 caracteres
         hashed_password = hashing.hash_value(senha)
         hashed_password = hashed_password[:16]
         
-        #checando se o cpf já está cadastrado
         cursor = db.cursor(dictionary=True)
         cursor.execute(f"SELECT * FROM Fornecedor WHERE cnpj='{cnpj}'")
         check_fornecedorExiste = cursor.fetchall()
@@ -75,7 +73,6 @@ def cadastroFornecedor():
         if check_fornecedorExiste:
             raise Exception("Esse cnpj já está cadastrado!")
         else:
-            # dando post no banco com as informações do fornecedor
             post_fornecedor = "INSERT INTO Fornecedor (cnpj, nome, senha, email) VALUES (%s, %s, %s, %s)"
             
             tupla_fornecedorInfo = (cnpj, nome, hashed_password, email)
@@ -96,11 +93,9 @@ def cadastro():
         telefone = request.form['telephone']
         senha = request.form['password']
 
-        #dando hashing na senha, hashing de 16 caracteres
         hashed_password = hashing.hash_value(senha)
         hashed_password = hashed_password[:16]
         
-        #checando se o email já está cadastrado
         cursor = db.cursor(dictionary=True)
         cursor.execute(f"SELECT * FROM Usuario WHERE email='{email}'")
         check_pessoa_existe = cursor.fetchall()
@@ -108,7 +103,6 @@ def cadastro():
         if check_pessoa_existe:
             return ("Este email já foi cadastrado!")
         else:
-            # dando post no banco com as informações do cliente
             userBD = "INSERT INTO Usuario (nome, senha, email) VALUES (%s, %s, %s)"
             
             tupla_user= (nome, senha, email)
@@ -117,7 +111,6 @@ def cadastro():
             cursor.close()
             db.commit()
             
-            # criando outro cursor para pegar o id_cliente que acabou de ser adicionado para adicionar o telefone do mesmo
             cursor = db.cursor(dictionary=True)
             selectUserID = (f"SELECT UsuarioID FROM Usuario WHERE email='{email}'")
             cursor.execute(selectUserID)
@@ -147,13 +140,10 @@ def iniciar():
         pessoaExiste = cursor.fetchall()
 
         if pessoaExiste:
-            login_user(user)
-            flash('Login bem-sucedido!')
             return render_template('index.html')
         else:
             flash('Usuário ou senha incorretos.')
-        
-    return render_template('index-iniciar.html')
+    return render_template('index.html')
 
 @app.route('/carrinho', methods = ['GET', 'POST'])
 def carrinho():
@@ -202,6 +192,35 @@ def cadastrando():
     db.commit()
 
     return render_template('abafornecedor.html')
+
+@app.route('/buscar', methods = ['POST'])
+def buscar():
+    resposta = request.form['pesquisa']
+
+    cursor = db.cursor(dictionary=True)
+
+    select = (f"SELECT nome, preco FROM Livro WHERE nome LIKE '%{resposta}%'")
+    cursor.execute(select)
+    fetchdata = cursor.fetchone()
+    print(fetchdata)
+
+    cursor.reset()
+
+    #cursor = db.cursor(dictionary=True)
+
+
+    select2 = ("SELECT caminho FROM IMG INNER JOIN Livro ON CodLivro = LivroID")
+
+    print('cheguei')
+    cursor.execute(select2)
+    fetchdata2 = cursor.fetchone()
+    print(fetchdata2)
+
+    if (cursor.rowcount>0):
+        return render_template('index-produtos.html', busca= fetchdata)
+    else:
+        return render_template('index-produtos.html', busca='Item não encontrado')
+
 
 if __name__ == "__main__":
     app.run(debug = True)

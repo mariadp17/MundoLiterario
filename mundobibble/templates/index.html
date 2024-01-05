@@ -25,9 +25,9 @@
         <div class="destaques">DESTAQUES</div>
         <div class="destaques">PRODUTOS</div>
         <div class="destaques">CONTATOS</div>
-        <form class="search-container">
-            <input type="text" id="search-bar" placeholder="Busca">
-            <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+        <form class="search-container" action="/buscar" method="post">
+            <input type="text" name="pesquisa" id="search-bar" placeholder="Buscar" autocomplete="off">
+            <a href="/buscar"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
         </form>
     </div>
 
@@ -65,7 +65,7 @@
 
         <div class="grid-container">
     
-                
+
                 <div class="card-container">
                     {% if livros != [] %}
                         {% for livro in livros %}
@@ -73,6 +73,8 @@
                                 {% if livro['LivroID'] == img['CodLivro'] %}
                                         <div class="grid-item">
                                             <img src="{{ img.caminho }}">
+                                           <p class="info">{{ livro.nome }}</p>
+                                           <p class="info">R$ {{ livro.preco }}</p> 
                                             <div class="card">DETALHES</div>
                                             <div class="card">COMPRAR</div> 
                                         </div>
@@ -86,20 +88,11 @@
                     <div class="card">DETALHES</div>
                     <div class="card">COMPRAR</div> 
                 </div>
-                <div class="grid-item">
-                    <img src="">
-                    <div class="card">DETALHES</div>
-                    <div class="card">COMPRAR</div> 
-                </div>
             </div>
          {% endblock %}
       
         
-        <button class="mais_produtos"><a href="index-produto.html">VER MAIS PRODUTOS</a></button>
-        <div class="lancamentos">
-            <div class="lanca"><h1>LANÇAMENTOS</h1></div>
-            <div class="linha2"></div>
-        </div>
+        <button class="mais_produtos"><a href="index-produtos.html">VER MAIS PRODUTOS</a></button>
         
         <footer>
             <div class="footer">

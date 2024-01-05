@@ -23,10 +23,6 @@
         <div class="destaques">DESTAQUES</div>
         <div class="destaques">PRODUTOS</div>
         <div class="destaques">CONTATOS</div>
-        <form class="search-container">
-            <input type="text" id="search-bar" placeholder="Busca">
-            <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
-        </form>
     </div>
 
     <div class="produtinhos">
@@ -46,148 +42,18 @@
           <option value="poemas">Poemas</option>
         </select>
   </form>
-  <div action="/produtos">
-    {% if Livro != [] %}
-    {% for livro in livros %}
-        {% for img in imgs %}
-            {% if Livro['LivroID'] == IMG['CodLivro'] %}
-            <a href="/IMG/{{ Livro['nome'] }}">
-                <div class="card">
-                    {% if img.caminho != "" %}
-                        <div class="img-container"><img class="card-image" src="{{ img.caminho }}" alt=""></div>
-                    {% else %}
-                        <div class="img-container"><img class="card-image" src="../static/img/404.png" alt=""></div>
-                    {% endif %}
-                        <hr class="card-line">
-                        <h1 class="product-name" >{{ Livro.nome }}</h1>
-                        <h2 class="product-price">R${{ Livro.preco }}</h2>
-                        <div class="card-container">
-                            <div class="card">DETALHES</div>
-                            <div class="card">COMPRAR</div>
-                        </div>
-                </div>
-            </a>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
-    {% else %}
-    <h2>Lamentamos, mas não há nenhum produto em nosso catálogo. =(</h2>
-    {% endif %}
-  </div>
-{% if Livro != [] %}
-{% for livro in livros %}
-    {% for img in imgs %}
-        {% if Livro['LivroID'] == IMG['CodLivro'] %}
-        <a href="/IMG/{{ Livro['nome'] }}">
-            <div class="card">
-                {% if img.caminho != "" %}
-                    <div class="img-container"><img class="card-image" src="{{ img.caminho }}" alt=""></div>
-                {% else %}
-                    <div class="img-container"><img class="card-image" src="../static/img/404.png" alt=""></div>
-                {% endif %}
-                    <hr class="card-line">
-                    <h1 class="product-name" >{{ Livro.nome }}</h1>
-                    <h2 class="product-price">R${{ Livro.preco }}</h2>
-                    <div class="card-container">
-                      <div class="card">DETALHES</div>
-                      <div class="card">COMPRAR</div>
-                  </div>
-            </div>
-        </a>
-        {% endif %}
-    {% endfor %}
-{% endfor %}
-{% else %}
-<h2>Lamentamos, mas não há nenhum produto em nosso catálogo. =(</h2>
-{% endif %}
 
-    <!-- <div class="grid-container">
+    {% block content%}
+    <div class="grid-container">
         <div class="grid-item">
-            <img src="../static/imgs/a maldição do mar.jpg">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
+            <img src="{{ busca['imgs'] }}">
+            <p>{{ busca['nome'] }}</p>
+            <p>R${{ busca['preco'] }}</p>
+            <div class="card">DETALHES</div>
+                <div class="card">COMPRAR</div> 
         </div>
-        <!-- <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <p><strong>nome do livro</strong><br><br>preço</p>
-            <div class="card-container">
-                <div class="card">DETALHES</div>
-                <div class="card">COMPRAR</div>
-            </div>
-        </div> --> 
     </div>
+    {% endblock %}
 
     <footer>
         <div class="footer">
