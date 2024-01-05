@@ -68,6 +68,7 @@ CREATE TABLE Estoque(
 EstoqueID INT auto_increment NOT NULL,
 quantiEstoque INT NOT NULL,
 CodFornecedor INT,
+LivroID INT NOT NULL,
 primary key (EstoqueID),
 foreign key (CodFornecedor) references Fornecedor(FornecedorID)
 );

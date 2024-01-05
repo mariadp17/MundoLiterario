@@ -1,5 +1,11 @@
 use MundoLiterario;
 
-INSERT INTO Usuario (nome, senha, email) VALUES 
-('Vitoria Costa Pereira', 2020, 'pereira.vivi@gmail.com'),
-('Maria Dantas Pontes',3030,'mariazinha@gmail.com');
+#ALTER TABLE Estoque ADD CONSTRAINT fk_Livro foreign key (LivroID) references Livro(LivroID);
+
+CREATE TABLE IMG(
+	CodImg INT auto_increment NOT NULL,
+	caminho VARCHAR(500) NOT NULL,
+    CodLivro INT NOT NULL,
+    primary key (CodImg),
+    foreign key (CodLivro) references Livro(LivroID)
+);

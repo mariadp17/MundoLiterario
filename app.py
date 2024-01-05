@@ -8,7 +8,13 @@ from flask_hashing import Hashing
 app = create_app()
 
 # Configurações do banco de dados
-db = mysql.connector.connect(host = 'localhost', user = 'root', password = 'labinfo', database = 'MundoLiterario')
+
+db = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='labinfo',
+    database='MundoLiterario'
+)
 
 hashing = Hashing(app)
 
@@ -18,15 +24,27 @@ mysql.init_app(app)
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
-    return render_template('index.html')
+    cursor = db.cursor(dictionary=True)
+    select = "SELECT * FROM Livro"
+    cursor.execute(select)
+    livros = cursor.fetchall()
 
+    select = "SELECT * FROM IMG"
+    
+    cursor.execute(select)
+    imgs = cursor.fetchall()
+    print(livros)
+    print("==========")
+    print(imgs)
+    return render_template('index.html', livros = livros, imgs = imgs)
+    
 @app.route('/livro')
 def livro():
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM livro")
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM Livro")
     data = cursor.fetchall()
     cursor.close()
-    return str(data)
+    return render_template('index-produtos.html', livros=data)
 
 @app.route('/autor/<name>')
 def autor(name):
@@ -35,6 +53,7 @@ def autor(name):
     data = cursor.fetchall()
     cursor.close()
     return str(data)
+
 
 @app.route('/cadastro-fornecedor', methods = ['GET','POST'])
 def cadastroFornecedor():
@@ -141,28 +160,25 @@ def carrinho():
     return render_template('index-carrinho.html')
 
 @app.route('/cadastrarProduto', methods=['GET','POST'])
-def enviar():
+def cadastrando():
     nome = request.form['nomeLivro']
     dataDPubli = request.form['data']
     preco = request.form['preco']
     quant = request.form['quantidade']
-    a = request.files['imgs']
+    a = request.files['arq']
 
     extensao = a.filename.rsplit('.',1)[1]
-    '''
-    foto.png.jpg > "foto.png.jpg".rsplit('.',1) > ['foto.png', 'jpg'][1] > jpg
-    '''
 
-    caminho = f'../static/imgs/{nome}.{extensao}'
+    caminho = f'mundobibble/static/imgs/{nome}.{extensao}'
     a.save(caminho)
         
     caminhoBD = f'../static/imgs/{nome}.{extensao}'
         
     cursor = db.cursor(dictionary=True)
 
-    sql = ("INSERT INTO Livro (nome, dataDPubli, preco, CodAutor, CodEditora, CodCategoria, quantidade) VALUES (%s, %s, %s, %s, %s, %s)")
+    sql = ("INSERT INTO Livro (nome, dataDPubli, preco) VALUES (%s, %s, %s)")
 
-    tupla = (nome, dataDPubli, preco, quant)
+    tupla = (nome, dataDPubli, preco)
     cursor.execute(sql, tupla)
     cursor.close()
     db.commit()
@@ -172,12 +188,12 @@ def enviar():
     cursor.execute(select)
     fetchdata = cursor.fetchall()
         
-    sql = ("INSERT INTO Estoque (quantidade, FornecedorID, LivroID) VALUES (%s, %s, %s)")
+    sql = ("INSERT INTO Estoque (quantiEstoque, CodFornecedor, LivroID) VALUES (%s, %s, %s)")
         
     tupla = (int(quant), 1, fetchdata[0]['LivroID'])
     cursor.execute(sql, tupla)
         
-    sql2 = ("INSERT INTO IMG (caminho, CodLivro, CodImg) VALUES (%s, %s)")
+    sql2 = ("INSERT INTO IMG (caminho, CodLivro) VALUES (%s, %s)")
 
     tupla2 = (caminhoBD, fetchdata[0]['LivroID'])
         

@@ -1,3 +1,3 @@
 use MundoLiterario;
 
-select * from Fornecedor
+select * from IMG
